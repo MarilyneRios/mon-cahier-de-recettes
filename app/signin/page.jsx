@@ -34,11 +34,11 @@ export default function SignUp() {
   return (
     <div
       className="d-flex flex-column align-items-center justify-content-center"
-      style={{ height: "88vh" }}
+      style={{"height": "90vh", "backgroundColor": "#f8f9fa"}}
     >
       <form
         onSubmit={handleSignIn}
-        className="w-50  border border-black rounded p-5"
+        className="w-50  border border-black rounded p-5 m-0 shadow-lg" style={{ "backgroundColor": "#ffffff" }}
       >
         <div className="fs-3 my-3 text-center mb-5 mt-1 fw-bold">
           Se connecter

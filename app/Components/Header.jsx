@@ -4,14 +4,14 @@ export default function Header() {
   return (
     <div>
       {/* Barre de navigation avec des classes Bootstrap */}
-      <nav className="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+      <nav className="navbar bg-custom-color border-bottom border-body" data-bs-theme="dark">
         <div className="container">  
          {/* Logo ou titre du site avec un lien vers la page d'accueil */}
-          <Link href={"/"} className="navbar-brand">Mon cahier de recettes</Link>
+          <Link href={"/"} className="navbar-brand display-2">Mon cahier de recettes</Link>
            {/* Bouton de lien vers la page de connexion */}
             <Link 
             href={"/signin"}
-            className="btn btn-outline-success" >
+            className= "btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover" >
               Se connecter
             </Link>
           

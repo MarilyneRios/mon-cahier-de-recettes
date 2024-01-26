@@ -1,0 +1,19 @@
+.bg-custom-color {
+  background-color: #007bff;
+}
+
+.bg-black-hover {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.text-white-hover {
+  transition: color 0.3s ease-in-out;
+}
+
+.bg-black-hover:hover {
+  background-color: #000 !important;  
+}
+
+.text-white-hover:hover {
+  color: #fff !important;  
+}
