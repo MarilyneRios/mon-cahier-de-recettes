@@ -34,7 +34,7 @@ export default function SignUp() {
     >
       <form
         onSubmit={handleSignUp}
-        className="w-50  border border-black rounded p-5 m-0 shadow-lg" 
+        className="w-50  border border-black rounded p-5 m-0 form-shadow" 
         style={{ "backgroundColor": "#ffffff" }}>
         <div className="fs-3 my-3 text-center mb-5 mt-1 fw-bold">
           Créer un compte

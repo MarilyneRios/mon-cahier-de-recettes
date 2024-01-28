@@ -1,3 +1,4 @@
+
 .bg-custom-color {
   background-color: #007bff;
 }
@@ -11,9 +12,16 @@
 }
 
 .bg-black-hover:hover {
-  background-color: #000 !important;  
+  background-color: #000 !important;
 }
 
 .text-white-hover:hover {
-  color: #fff !important;  
+  color: #fff !important;
+}
+.form-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.custom-width {
+  width: 75%; 
 }
