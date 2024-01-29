@@ -25,3 +25,13 @@
 .custom-width {
   width: 75%; 
 }
+.card-scale-transform {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-scale-transform:hover {
+  transform: scale(1.15);
+  cursor: pointer;
+}
+
+

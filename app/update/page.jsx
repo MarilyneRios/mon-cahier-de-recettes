@@ -1,12 +1,12 @@
 "use client"
 import Link from "next/link";
-import RecipeCard from "./Components/RecipeCard";
+import CompleteRecipeCard from "../Components/CompleteRecipeCard";
 import { useEffect, useState } from "react";
 import { collection, getDocs} from "firebase/firestore"
-import{db} from "./lib/firebase";
+import{db} from "../lib/firebase";
 
 
-export default function Home() {
+export default function Update() {
 
   const [recipesList, setRecipesList] = useState([]);
 
@@ -35,13 +35,15 @@ export default function Home() {
   return (
     
     <main className="my-3 container">
-        <div className="d-flex justify-content-between  ">
-        <h4 style={{ fontFamily: "Roboto", fontSize: "1.6rem",}}>Liste des recettes</h4>
-        <Link href={"/recipes/create"} className="btn btn-primary">Ajouter une nouvelle recette</Link>
+        
+           {/*  Affiche le titre et le btn add */}
+           <div className="d-flex justify-content-between  ">
+        <h4>Liste des recettes</h4>
+        <Link href={"/recipes/create"} className="btn btn-outline-primary m-1  text-decoration-none">Ajouter une nouvelle recette</Link>
         </div>
         <div className="d-flex felx-wrap">
         {recipesList.map((recipe) => (
-          recipe.imageUrl ? <RecipeCard key={recipe.id} recipeProps={recipe} /> :null
+          recipe.imageUrl ? <CompleteRecipeCard key={recipe.id} recipeProps={recipe} /> :null
         ))}
 
         </div>

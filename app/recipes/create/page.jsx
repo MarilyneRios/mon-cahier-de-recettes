@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { auth, storage, db } from "../../lib/firebase";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection, getDocs, addDoc } from "firebase/firestore";
-
+import { collection, getDoc, addDoc, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 export default function CreateRecipe() {
   const [title, setTitle] = useState("");
@@ -13,6 +13,8 @@ export default function CreateRecipe() {
   const [instructions, setInstructions] = useState("");
   const [comments, setComments] = useState("");
   const [files, setFiles] = useState("");
+
+  const router = useRouter();
 
   const handleImageUpload = (e) => {
     setFiles(e.target.files[0]);
@@ -73,10 +75,11 @@ const metadata = {
           console.log("File available at", downloadURL);
           //télécharger les datas des inputs
           const recipesCollection = collection(db, "recipes");
-          const recipesSnapshot = await getDocs(recipesCollection);
+          const recipesSnapshot = await getDoc(recipesCollection);
           try{
             await addDoc(recipesCollection,{
               title: title,
+              category: category,
               ingredients: ingredients,
               instructions:instructions,
               comments: comments,
@@ -87,7 +90,13 @@ const metadata = {
           catch (error){
             alert("Something went wrong", error)
           }
-   
+          setTitle("");
+          setIngredients("");
+          setInstructions("");
+          setComments("");
+          setFiles(null);
+
+          router.push("/")
         });
       }
     );

@@ -40,11 +40,11 @@ export default function SignUp() {
         onSubmit={handleSignIn}
         className="w-50  border border-black rounded p-5 m-0 form-shadow" style={{ "backgroundColor": "#ffffff" }}
       >
-        <div className="fs-3 my-3 text-center mb-5 mt-1 fw-bold">
+        <div className="fs-3 my-3 text-center mb-3 mt-1 fw-bold">
           Se connecter
         </div>
 
-        <div className="mb-4">
+        <div className="mb-3">
           <label
             htmlFor="exampleInputEmail1"
             className="form-label text-center"
@@ -63,7 +63,7 @@ export default function SignUp() {
             Nous ne partagerons jamais votre adresse e-mail.
           </div>
         </div>
-        <div className="mb-4">
+        <div className="mb-3">
           <label
             htmlFor="exampleInputPassword1"
             className="form-label text-center"
