@@ -49,12 +49,12 @@ export default function SignUp() {
             htmlFor="exampleInputEmail1"
             className="form-label text-center"
           >
-            Addresse Email
+            Addresse email factice
           </label>
           <input
             type="email"
             name="email"
-            placeholder="email@gmail.com"
+            placeholder="email@factice.com"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"

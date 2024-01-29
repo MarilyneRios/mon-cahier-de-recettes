@@ -45,7 +45,7 @@ export default function SignUp() {
             htmlFor="exampleInputEmail1"
             className="form-label text-center"
           >
-            Addresse Email factice
+            Addresse email factice
           </label>
           <input
             type="email"

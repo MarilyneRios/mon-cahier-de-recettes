@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./Components/header";
-import HeaderConnect from "./Components/headerConnect";
+//import HeaderConnect from "./Components/headerConnect";
 import  Footer  from "./Components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,14 +18,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className={inter.className}>
-
         
         {/* <HeaderConnect/>*/}
         <div id="section_headr"
         style={{height: "10vh", width:"100vw"}}>
         <Header/>
         </div>
-       
             
         <div id="section_main"
         style={{height: "85vh", width:"100vw", overflowY: "auto", backgroundColor: "#f8f9fa",  }}>
