@@ -2,16 +2,16 @@
 import { auth } from "../lib/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation"; //attention PAS "next/router";
 
 export default function SignUp() {
   
-
+  const router = useRouter();
  // const auth = getAuth();//
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const { email, password } = e.target.elements;
+    const {  email, password } = e.target.elements;
 
     await createUserWithEmailAndPassword(auth, email.value, password.value)
       .then((userCredential) => {
@@ -19,6 +19,7 @@ export default function SignUp() {
         const user = userCredential.user;
         console.log(user);
         window.alert("successfully create user")
+        router.push("/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -30,7 +31,7 @@ export default function SignUp() {
   return (
     <div
       className="d-flex flex-column align-items-center justify-content-center"
-      style={{ "backgroundColor": "#f8f9fa"}}
+      
     >
       <form
         onSubmit={handleSignUp}
@@ -39,22 +40,7 @@ export default function SignUp() {
         <div className="fs-3  text-center my-2 fw-bold">
           Créer un compte
         </div>
-        <div className="my-2">
-          <label
-            htmlFor="username"
-            className="form-label text-center"
-          >
-            pseudo
-          </label>
-          <input
-            type="text"
-            name="pseudo"
-            placeholder="pseudo"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-          </div>
+
         <div className="my-1">
           <label
             htmlFor="exampleInputEmail1"
@@ -67,7 +53,7 @@ export default function SignUp() {
             name="email"
             placeholder="email@factice.com"
             className="form-control"
-            id="exampleInputEmail1"
+            id="inputEmail1"
             aria-describedby="emailHelp"
           />
           <div id="emailHelp" className="form-text text-center">
@@ -76,7 +62,7 @@ export default function SignUp() {
         </div>
         <div className="my-2">
           <label
-            htmlFor="exampleInputPassword1"
+            htmlFor="inputPassword1"
             className="form-label text-center"
           >
             Mot de passe
@@ -107,3 +93,23 @@ export default function SignUp() {
     </div>
   );
 }
+
+
+/* option à traviller ensuite
+        <div className="my-2">
+          <label
+            htmlFor="username"
+            className="form-label text-center"
+          >
+            pseudo
+          </label>
+          <input
+            type="text"
+            name="username"
+            placeholder="pseudo"
+            className="form-control"
+            id="inputUsername"
+            aria-describedby="emailHelp"
+          />
+          </div>
+*/

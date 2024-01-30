@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { auth, storage, db } from "../../lib/firebase";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection, getDoc, addDoc, setDoc } from "firebase/firestore";
+import { collection, getDocs,getDoc, addDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
 export default function CreateRecipe() {
@@ -12,6 +12,7 @@ export default function CreateRecipe() {
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [comments, setComments] = useState("");
+  const [username, setUsername] = useState ("");
   const [files, setFiles] = useState("");
 
   const router = useRouter();
@@ -33,7 +34,7 @@ const metadata = {
 };
 
     // **exemple complet de téléchargement de firebase**
-    const storageRef = ref(storage, files.name);
+    const storageRef = ref(storage, files.name ); 
     const uploadTask = uploadBytesResumable(storageRef, files, metadata);
     
     // Listen for state changes, errors, and completion of the upload.
@@ -75,7 +76,7 @@ const metadata = {
           console.log("File available at", downloadURL);
           //télécharger les datas des inputs
           const recipesCollection = collection(db, "recipes");
-          const recipesSnapshot = await getDoc(recipesCollection);
+          const recipesSnapshot = await getDocs(recipesCollection); //getDoc
           try{
             await addDoc(recipesCollection,{
               title: title,
@@ -84,6 +85,7 @@ const metadata = {
               instructions:instructions,
               comments: comments,
               imageUrl: downloadURL,
+              username: username,
               userId: auth.currentUser.uid,
             })
           }
@@ -94,8 +96,9 @@ const metadata = {
           setIngredients("");
           setInstructions("");
           setComments("");
-          setFiles(null);
-
+          setUsername ("");
+          setFiles(""); 
+          
           router.push("/")
         });
       }
@@ -178,11 +181,22 @@ const metadata = {
         </div>
         <div className="mb-2 col-md-9">
           <input
+            className="form-control"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="pseudo"
+            required
+          />
+        </div>
+        <div className="mb-2 col-md-9">
+          <input
             type="file"
             class="form-control"
             onChange={handleImageUpload}
             required
           />
+           
         </div>
         <div className="mb-1  d-flex justify-content-center">
           <button className="btn btn-outline-primary w-100">Envoyer</button>

@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
   
   return (
     <html lang="fr">
-      <body className={inter.className}>
+      <body className="">
         
         {/* <HeaderConnect/>*/}
         <div id="section_header"
@@ -27,8 +27,8 @@ export default function RootLayout({ children }) {
         </div>
             
         <div id="section_main"
-        className="my-3 p-0"
-        style={{  width:"100vw"}}>
+        className="m-0 py-3"
+        style={{ backgroundColor: "#f8f9fa", width:"100vw", minHeight: "50vh"}}>
         {children} </div>
         
         <div id="section_footer"

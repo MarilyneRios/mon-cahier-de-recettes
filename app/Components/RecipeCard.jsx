@@ -23,6 +23,8 @@ export default function RecipeCard({ recipeProps, handleDeleteRecipe }) {
             <p className="card-text" style={{ height: "1.5rem", overflowY: "auto" }}>{recipeProps.category}</p>
             <p className="card-text" style={{ height: "1.5rem", overflowY: "auto" }}>{recipeProps.instructions}</p>
             <p className="card-text" style={{ height: "1.5rem", overflowY: "auto" }}>{recipeProps.comments}</p>
+            <p className="card-text" style={{ height: "1.5rem", overflowY: "auto" }}>{recipeProps.username}</p>
+
           </div>
         </div>
       </Link>

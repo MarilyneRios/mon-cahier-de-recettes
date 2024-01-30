@@ -1,19 +1,18 @@
-"use client"
+"use client";
 import Link from "next/link";
-import { useState,useEffect } from "react";
-import { getAuth, signOut, onAuthStateChanged  } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation"; //attention PAS "next/router";
 
 export default function Header() {
-
   //gérer l'état de connexion
   const [isLoggedIn, setIsLoggedIn] = useState(false);
- //définir la variable auth
- const auth = getAuth();
- const router = useRouter();
+  //définir la variable auth
+  const auth = getAuth();
+  const router = useRouter();
 
-   //style 
-   const linkStyle = {
+  //style
+  const linkStyle = {
     fontFamily: "Roboto",
     fontSize: "2rem",
   };
@@ -22,7 +21,7 @@ export default function Header() {
   const handleLogout = async (e) => {
     //prévenir le comportement par défaut du bouton
     e.preventDefault();
-    
+
     signOut(auth)
       .then((userCredential) => {
         // logout
@@ -36,8 +35,8 @@ export default function Header() {
         const errorMessage = error.message;
         window.alert(errorMessage);
       });
-  setIsLoggedIn(false);
-};
+    setIsLoggedIn(false);
+  };
 
   // Utiliser useEffect pour écouter les changements d'authentification
   useEffect(() => {
@@ -69,18 +68,30 @@ export default function Header() {
           >
             Mon cahier de recettes
           </Link>
-          <div className="d-flex align-items-center justify-content-center box-shadow mx-auto my-1">
-          <input id="search-input"  class="form-control w-10 h-25 bg-white text-black-placeholder text-black bg-gradient" type="search" placeholder="Rechercher un recette" aria-label="Search"/>
-           <button id="search-button" class="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-2 " type="submit">Rechercher</button>
+           {/* barre de recherche*/}
+          <div className="d-flex align-items-center justify-content-center  mx-auto my-1">
+            <input
+              id="search-input"
+              className="form-control w-10vw bg-white text-black-placeholder text-black bg-gradient"
+              type="search"
+              placeholder="Rechercher un recette"
+              aria-label="Search"
+            />
+            <button
+              id="search-button"
+              className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-2 "
+              type="submit"
+            >
+              Rechercher
+            </button>
           </div>
-     
-          
+
           {/* Affichez les liens de connexion ou de déconnexion en fonction de l'état */}
           <div>
             {isLoggedIn ? (
               <button
                 onClick={handleLogout}
-                className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-1"
+                className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-1 "
               >
                 Se déconnecter
               </button>

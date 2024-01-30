@@ -12,10 +12,10 @@ export default function Footer() {
   return (
     <div  className="container-fluid panel-footer py-3"  style={linkStyle}>
    
-      <div className='d-flex flex-column align-items-center justify-content-center mt-3'>
+      <div className='d-flex flex-column align-items-center justify-content-center '>
         
-        <p  > <span className="fw-bold" >Ce site est un exercice d'entrainement</span> avec Nextjs14, Bootstrap and Firebase, 
-        <span className="fst-italic">Copyright © 2024 by Marilyne Rios</span> </p>
+        <p  > <span className="fw-bold" >Ce site est un exercice d'entrainement</span> avec Nextjs14, Bootstrap and Firebase,  
+        <span className="fst-italic">{" "} Copyright © 2024 by Marilyne Rios</span> </p>
         <p >Vous pouvez utiliser un email factice pour vous connecter et tester le site.
        
         </p>

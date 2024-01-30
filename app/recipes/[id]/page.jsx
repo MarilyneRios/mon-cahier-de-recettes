@@ -16,6 +16,7 @@ export default function DetailsRecipeCard({ params }) {
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [comments, setComments] = useState("");
+  const [username, setUsername] = useState ("");
   const [files, setFiles] = useState("");
   const [user, setUser] = useState(null);
   const auth = getAuth();
@@ -70,6 +71,7 @@ export default function DetailsRecipeCard({ params }) {
       ingredients: ingredients,
       instructions: instructions,
       comments: comments,
+      username: username,
     });
     router.push("/");
   };
@@ -82,7 +84,6 @@ export default function DetailsRecipeCard({ params }) {
         style={{
           height: "85vh",
           overflowY: "auto",
-          backgroundColor: "#f8f9fa",
         }}
       >
         <form
@@ -151,6 +152,17 @@ export default function DetailsRecipeCard({ params }) {
               value={comments}
               onChange={(e) => setComments(e.target.value)}
               placeholder="Ajouter un commentaire"
+              required
+            />
+          </div>
+          <div className="mb-2 col-md-9">
+            <input
+              className="form-control"
+              type="text"
+              rows={1}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Ajouter un pseudo"
               required
             />
           </div>

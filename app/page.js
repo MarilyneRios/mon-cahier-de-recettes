@@ -1,11 +1,14 @@
 "use client";
 import Link from "next/link";
 import RecipeCard from "./Components/RecipeCard";
+import CompleteRecipeCard from "./Components/CompleteRecipeCard";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./lib/firebase";
 //importer le composant auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+
 
 export default function Home() {
   const [recipesList, setRecipesList] = useState([]);
@@ -50,15 +53,21 @@ export default function Home() {
           <h4 style={{ fontFamily: "Roboto", fontSize: "1.6rem" }}>
             Liste des recettes
           </h4>
-          <Link href={"/recipes/create"} className="btn btn-primary">
-            Ajouter une nouvelle recette
-          </Link>
+          <div>
+            <Link href={"/recipes/create"} className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-2">
+              Ajouter une nouvelle recette
+            </Link>
+            <Link href={"/bookmarker"} className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-2">
+              Accéder à mes favoris
+            </Link>
+          </div>
+
         </div>
 
         <div className="d-flex felx-wrap">
           {recipesList.map((recipe) =>
             recipe.imageUrl ? (
-              <RecipeCard key={recipe.id} recipeProps={recipe} />
+              <CompleteRecipeCard key={recipe.id} recipeProps={recipe} />
             ) : null
           )}
         </div>
