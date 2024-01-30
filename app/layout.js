@@ -20,18 +20,20 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         
         {/* <HeaderConnect/>*/}
-        <div id="section_headr"
-        style={{height: "10vh", width:"100vw"}}>
+        <div id="section_header"
+        className="m-0 p-0"
+        >
         <Header/>
         </div>
             
         <div id="section_main"
-        style={{height: "85vh", width:"100vw", overflowY: "auto", backgroundColor: "#f8f9fa",  }}>
+        className="my-3 p-0"
+        style={{  width:"100vw"}}>
         {children} </div>
         
         <div id="section_footer"
-        className="m-0 p-0"
-        style={{height: "20px", width:"100vw", borderTop: "1px solid black"}}>
+       
+        style={{  borderTop: "1px solid black"}}>
         <Footer/>
         </div>
        

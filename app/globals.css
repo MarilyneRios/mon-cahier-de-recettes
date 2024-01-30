@@ -1,3 +1,10 @@
+.className{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: "#f8f9fa",
+}
 
 .bg-custom-color {
   background-color: #007bff;

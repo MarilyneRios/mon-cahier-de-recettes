@@ -34,17 +34,17 @@ export default function SignUp() {
   return (
     <div
       className="d-flex flex-column align-items-center justify-content-center"
-      style={{"height": "90vh", "backgroundColor": "#f8f9fa"}}
+      style={{ "backgroundColor": "#f8f9fa"}}
     >
       <form
         onSubmit={handleSignIn}
-        className="w-50  border border-black rounded p-5 m-0 form-shadow" style={{ "backgroundColor": "#ffffff" }}
+        className="w-50  border border-black rounded py-2 px-5 form-shadow" style={{ "backgroundColor": "#ffffff" }}
       >
-        <div className="fs-3 my-3 text-center mb-3 mt-1 fw-bold">
+        <div className="fs-3 my-3 text-center mb-2 mt-1 fw-bold">
           Se connecter
         </div>
 
-        <div className="mb-3">
+        <div className="mb-2">
           <label
             htmlFor="exampleInputEmail1"
             className="form-label text-center"
@@ -63,7 +63,7 @@ export default function SignUp() {
             Nous ne partagerons jamais votre adresse e-mail.
           </div>
         </div>
-        <div className="mb-3">
+        <div className="mb-2">
           <label
             htmlFor="exampleInputPassword1"
             className="form-label text-center"
@@ -82,17 +82,17 @@ export default function SignUp() {
         <button
           type="submit"
           
-          className="btn btn-primary mt-2 mb-2 form-control"
+          className="btn btn-primary mt-2  form-control"
         >
           Se connecter
         </button>
-        <p className="mt-3 form-text text-center">
+        <p className="mt-2 form-text text-center">
           Nouvel utilisateur ? {""}
           <Link href="/signup" className=" link-underline-light">
             Enregistrez-vous.
           </Link>
         </p>
-        <p className="mt-3 form-text text-center">
+        <p className="mt-1 form-text text-center">
           Vous ne vous souvenez plus de votre mot de passe ? {""}
           <Link href="/signup" className=" link-underline-light">
             Mot de passe oublié.

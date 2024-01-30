@@ -56,9 +56,9 @@ export default function Header() {
 
   //jsx
   return (
-    <div>
+    <div className="container-flux ">
       <nav
-        className="navbar bg-custom-color border-bottom border-body"
+        className="navbar  navbar-expand-sm bg-custom-color border-bottom border-body"
         data-bs-theme="dark"
       >
         <div className="container">
@@ -69,6 +69,12 @@ export default function Header() {
           >
             Mon cahier de recettes
           </Link>
+          <div className="d-flex align-items-center justify-content-center box-shadow mx-auto my-1">
+          <input id="search-input"  class="form-control w-10 h-25 bg-white text-black-placeholder text-black bg-gradient" type="search" placeholder="Rechercher un recette" aria-label="Search"/>
+           <button id="search-button" class="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-2 " type="submit">Rechercher</button>
+          </div>
+     
+          
           {/* Affichez les liens de connexion ou de déconnexion en fonction de l'état */}
           <div>
             {isLoggedIn ? (

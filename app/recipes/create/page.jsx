@@ -104,11 +104,11 @@ const metadata = {
 
   return (
     <div
-      className="d-flex align-items-center justify-content-center "
+      className="d-flex align-items-center justify-content-center mb-2 "
       style={{ height: "85vh", overflowY: "auto", backgroundColor: "#f8f9fa" }}
     >
       <form
-        className="d-flex  flex-column  align-items-center justify-content-center mt-4 custom-width  border border-black rounded p-3 form-shadow"
+        className="d-flex  flex-column  align-items-center justify-content-center mt-4 custom-width  border border-black rounded p-1 form-shadow"
         style={{ backgroundColor: "#ffffff" }}
         onSubmit={handleSubmit}
       >
@@ -176,7 +176,7 @@ const metadata = {
             required
           />
         </div>
-        <div className="mb-1 col-md-9">
+        <div className="mb-2 col-md-9">
           <input
             type="file"
             class="form-control"
@@ -184,7 +184,7 @@ const metadata = {
             required
           />
         </div>
-        <div className="mt-1  d-flex justify-content-center">
+        <div className="mb-1  d-flex justify-content-center">
           <button className="btn btn-outline-primary w-100">Envoyer</button>
         </div>
       </form>

@@ -30,17 +30,32 @@ export default function SignUp() {
   return (
     <div
       className="d-flex flex-column align-items-center justify-content-center"
-      style={{"height": "90vh", "backgroundColor": "#f8f9fa"}}
+      style={{ "backgroundColor": "#f8f9fa"}}
     >
       <form
         onSubmit={handleSignUp}
-        className="w-50  border border-black rounded p-5 m-0 form-shadow" 
+        className="w-50  max-width-sm max-height-sm border border-black rounded py-2 px-5  form-shadow" 
         style={{ "backgroundColor": "#ffffff" }}>
-        <div className="fs-3 my-3 text-center mb-5 mt-1 fw-bold">
+        <div className="fs-3  text-center my-2 fw-bold">
           Créer un compte
         </div>
-
-        <div className="mb-4">
+        <div className="my-2">
+          <label
+            htmlFor="username"
+            className="form-label text-center"
+          >
+            pseudo
+          </label>
+          <input
+            type="text"
+            name="pseudo"
+            placeholder="pseudo"
+            className="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+          </div>
+        <div className="my-1">
           <label
             htmlFor="exampleInputEmail1"
             className="form-label text-center"
@@ -59,7 +74,7 @@ export default function SignUp() {
             Nous ne partagerons jamais votre adresse e-mail.
           </div>
         </div>
-        <div className="mb-4">
+        <div className="my-2">
           <label
             htmlFor="exampleInputPassword1"
             className="form-label text-center"
@@ -78,11 +93,11 @@ export default function SignUp() {
         <button
           type="submit"
           
-          className="btn btn-primary mt-2 mb-2 form-control"
+          className="btn btn-primary my-1 form-control"
         >
           Enregistrer
         </button>
-        <p className="mt-3 form-text text-center">
+        <p className="my-2 form-text text-center">
           Vous avez déjà un compte ? {""}
           <Link href="/signin" className=" link-underline-light">
             Connectez-vous.
