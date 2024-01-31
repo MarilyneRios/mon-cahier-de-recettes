@@ -2,11 +2,19 @@ import React from "react";
 import Link from "next/link";
 
 export default function NavListAdd() {
+
+    //style
+    const linkStyle = {
+      fontFamily: "Roboto",
+      fontSize: "1.8rem",
+    
+    };
+
   return (
-    <div>
-      <div className="d-flex justify-content-between mt-4 ">
-        <h4 style={{ fontFamily: "Roboto", fontSize: "1.6rem" }}>
-          Liste des recettes
+    <div className="h-50%">
+      <div className="d-flex justify-content-between text-white mt-4 ">
+        <h4 style={linkStyle}>
+          Liste de mes recettes favorites
         </h4>
         <div>
           <Link
@@ -16,7 +24,7 @@ export default function NavListAdd() {
             Ajouter une nouvelle recette
           </Link>
           <Link
-            href={"/bookmarker"}
+            href={"/"}
             className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-2"
           >
             Retour à la liste des recettes

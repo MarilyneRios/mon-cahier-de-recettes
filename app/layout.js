@@ -1,42 +1,49 @@
-
 import { Inter } from "next/font/google";
 import "./globals.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Components/header";
 //import HeaderConnect from "./Components/headerConnect";
-import  Footer  from "./Components/Footer";
+import Footer from "./Components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Mon cahier de recettes",
-  description: "Grâce à cette application, vous allez pouvoir tenir un cahier de recette en ligne comme le faisait nos grands-mères.",
+  description:
+    "Grâce à cette application, vous allez pouvoir tenir un cahier de recette en ligne comme le faisait nos grands-mères.",
 };
 
 export default function RootLayout({ children }) {
-  
   return (
     <html lang="fr">
       <body className="">
-        
-        {/* <HeaderConnect/>*/}
-        <div id="section_header"
-        className="m-0 p-0"
+        <div id="section_header">
+          <Header />
+        </div>
+
+        <div
+          id="section_main"
+          className="m-0 py-3 relative"
+          style={{
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100vw",
+            minHeight: "50vh",
+            zIndex: "-1",
+            backgroundImage: "url('/bg.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
-        <Header/>
+          {children}
         </div>
-            
-        <div id="section_main"
-        className="m-0 py-3"
-        style={{ backgroundColor: "#f8f9fa", width:"100vw", minHeight: "50vh"}}>
-        {children} </div>
-        
-        <div id="section_footer"
-       
-        style={{  borderTop: "1px solid black"}}>
-        <Footer/>
+
+        <div id="section_footer" style={{ borderTop: "1px solid black" }}>
+          <Footer />
         </div>
-       
       </body>
     </html>
   );

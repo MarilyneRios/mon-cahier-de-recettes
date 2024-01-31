@@ -107,11 +107,10 @@ const metadata = {
 
   return (
     <div
-      className="d-flex align-items-center justify-content-center mb-2 "
-      style={{ height: "85vh", overflowY: "auto", backgroundColor: "#f8f9fa" }}
+      className="d-flex align-items-center justify-content-center mb-2 w-75 "
     >
       <form
-        className="d-flex  flex-column  align-items-center justify-content-center mt-4 custom-width  border border-black rounded p-1 form-shadow"
+        className="d-flex  flex-column  align-items-center justify-content-center mt-2 custom-width  border border-black rounded p-1 form-shadow"
         style={{ backgroundColor: "#ffffff" }}
         onSubmit={handleSubmit}
       >

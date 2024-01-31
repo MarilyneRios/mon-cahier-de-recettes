@@ -34,11 +34,11 @@ export default function SignUp() {
   return (
     <div
       className="d-flex flex-column align-items-center justify-content-center"
-      style={{ "backgroundColor": "#f8f9fa"}}
+      
     >
       <form
         onSubmit={handleSignIn}
-        className="w-50  border border-black rounded py-2 px-5 form-shadow" style={{ "backgroundColor": "#ffffff" }}
+        className=" border border-black rounded py-2 px-5 form-shadow" style={{ "backgroundColor": "#ffffff" }}
       >
         <div className="fs-3 my-3 text-center mb-2 mt-1 fw-bold">
           Se connecter
@@ -92,12 +92,12 @@ export default function SignUp() {
             Enregistrez-vous.
           </Link>
         </p>
-        <p className="mt-1 form-text text-center">
+        {/*<p className="mt-1 form-text text-center">
           Vous ne vous souvenez plus de votre mot de passe ? {""}
           <Link href="/signup" className=" link-underline-light">
             Mot de passe oublié.
           </Link>
-        </p>
+        </p>*/}
       </form>
     </div>
   );

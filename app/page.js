@@ -9,7 +9,6 @@ import { db } from "./lib/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
-
 export default function Home() {
   const [recipesList, setRecipesList] = useState([]);
   const [user, setUser] = useState(null);
@@ -49,10 +48,11 @@ export default function Home() {
   if (user) {
     return (
       <main className="my-2 container">
-        <div className="d-flex justify-content-between mt-4 ">
-          <h4 style={{ fontFamily: "Roboto", fontSize: "1.6rem" }}>
+      
+        <div className="d-flex justify-content-between mt-4 text-white">
+          <h3 style={{ fontFamily: "Roboto", fontSize: "1.8rem" }}>
             Liste des recettes
-          </h4>
+          </h3>
           <div>
             <Link href={"/recipes/create"} className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-2">
               Ajouter une nouvelle recette

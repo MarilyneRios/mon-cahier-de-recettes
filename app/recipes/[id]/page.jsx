@@ -58,7 +58,8 @@ export default function DetailsRecipeCard({ params }) {
   //style
   const linkStyle = {
     fontFamily: "Roboto",
-    fontSize: "1.5rem",
+    fontSize: "3rem",
+    backgroundColor: "rgba(255, 255, 255, 0.25)",
   };
 
   const handleSubmit = async (e) => {
@@ -181,11 +182,12 @@ export default function DetailsRecipeCard({ params }) {
   } else {
     //l'utilisateur est déconnecté, afficher un message
     return (
-      <div>
-        <p className="mt-5  d-flex justify-content-center" style={linkStyle}>
-          Veuillez vous connecter pour voir les détails de la recette.
-        </p>
-      </div>
+<div className="p-4  m-2 ">
+  <p className="my-5 p-5 d-flex justify-content-center text-white" style={linkStyle}>
+    Veuillez vous connecter pour voir les détails de la recette.
+  </p>
+</div>
+
     );
   }
 }

@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; //attention PAS "next/router";
 
+
 export default function SignUp() {
   
   const router = useRouter();
@@ -31,11 +32,10 @@ export default function SignUp() {
   return (
     <div
       className="d-flex flex-column align-items-center justify-content-center"
-      
     >
       <form
         onSubmit={handleSignUp}
-        className="w-50  max-width-sm max-height-sm border border-black rounded py-2 px-5  form-shadow" 
+        className="max-width-sm max-height-sm border border-black rounded py-2 px-5  form-shadow" 
         style={{ "backgroundColor": "#ffffff" }}>
         <div className="fs-3  text-center my-2 fw-bold">
           Créer un compte
@@ -92,6 +92,7 @@ export default function SignUp() {
       </form>
     </div>
   );
+ 
 }
 
 

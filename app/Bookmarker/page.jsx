@@ -9,8 +9,6 @@ import NavListAdd from "../Components/NavListAdd"
 
 //recipe-card
 export default function Bookmarker({  }) {
- 
-
 
   return (
     
