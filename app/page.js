@@ -49,7 +49,7 @@ export default function Home() {
     return (
       <main className="my-2 container">
       
-        <div className="d-flex justify-content-between mt-4 text-white">
+        <div className="d-flex justify-content-between mt-4 text-white p-3">
           <h3 style={{ fontFamily: "Roboto", fontSize: "1.8rem" }}>
             Liste des recettes
           </h3>

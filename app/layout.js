@@ -17,7 +17,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className="">
-        <div id="section_header">
+        <div id="section_header" 
+        style={{
+        maxHeight: "5vh",
+        width: "100vw",
+        }}>
           <Header />
         </div>
 
@@ -28,10 +32,11 @@ export default function RootLayout({ children }) {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             display: "flex",
+            flex: "wrap",
             justifyContent: "center",
             alignItems: "center",
             width: "100vw",
-            minHeight: "50vh",
+            minHeight: "80vh",
             zIndex: "-1",
             backgroundImage: "url('/bg.jpg')",
             backgroundSize: "cover",
@@ -41,7 +46,12 @@ export default function RootLayout({ children }) {
           {children}
         </div>
 
-        <div id="section_footer" style={{ borderTop: "1px solid black" }}>
+        <div id="section_footer" 
+        style={{ 
+        maxHeight: "3vh", 
+        margin:"auto",
+        paddingTop: "0.5rem"
+        }}>
           <Footer />
         </div>
       </body>

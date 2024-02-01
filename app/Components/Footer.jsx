@@ -6,11 +6,12 @@ export default function Footer() {
   const linkStyle = {
     fontFamily: "Roboto",
     fontSize: "0.9rem",
+    
   };
 
 
   return (
-    <div  className="container-fluid panel-footer py-3"  style={linkStyle}>
+    <div  className="container-fluid panel-footer p-3 text-center"  style={linkStyle}>
    
       <div className='d-flex flex-column align-items-center justify-content-center '>
         

@@ -69,7 +69,7 @@ export default function Header() {
             Mon cahier de recettes
           </Link>
            {/* barre de recherche*/}
-          <div className="d-flex align-items-center justify-content-center  mx-auto my-1">
+          <div className="d-flex  align-items-center justify-content-center  mx-auto my-1">
             <input
               id="search-input"
               className="form-control w-10vw bg-white text-black-placeholder text-black bg-gradient"
