@@ -2,11 +2,11 @@
 //import { Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { db } from "../../lib/firebase";
-
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 //importer le composant auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import ButtonBack from "@/app/Components/ButtonBack";
 
 
 export default function DetailsRecipeCard({ params }) {
@@ -55,13 +55,6 @@ export default function DetailsRecipeCard({ params }) {
     getDetailsRecipeCard();
   }, [params.id]);
 
-  //style
-  const linkStyle = {
-    fontFamily: "Roboto",
-    fontSize: "3rem",
-    backgroundColor: "rgba(255, 255, 255, 0.25)",
-  };
-
   const handleSubmit = async (e) => {
     //évite le rechargement de la page dans le cas d'un formulaire
     e.preventDefault();
@@ -81,24 +74,21 @@ export default function DetailsRecipeCard({ params }) {
   if (user) {
     return (
       <div
-        className="d-flex align-items-center justify-content-center "
-        style={{
-          height: "85vh",
-          overflowY: "auto",
-        }}
+        className="container  d-flex flex-column align-items-center justify-content-center"
       >
         <form
-          className="d-flex  flex-column  align-items-center justify-content-center mt-4 custom-width  border border-black rounded p-3 form-shadow"
-          style={{ backgroundColor: "#ffffff" }}
+          className="border border-success rounded py-2 px-5 shadow-lg form-shadow w-75 my-3"
+          style={{ backgroundColor: "#fafaf9"}}
           onSubmit={handleSubmit}
         >
-          <h1 className="mb-1 text-center " style={{ color: "#007bff" }}>
-            {" "}
+            <ButtonBack/>
+          <h1 className="fs-3 my-2 text-center  text-success" 
+          style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
             Modifier la recette
           </h1>
-          <div className="mb-2 col-md-9">
+          <div className="my-2 ">
             <input
-              className="form-control"
+              className="form-control input-lg"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -106,10 +96,10 @@ export default function DetailsRecipeCard({ params }) {
               required
             />
           </div>
-          <div className="mb-2 col-md-9">
+          <div className="my-2 ">
             {/* <label htmlFor="category">Catégorie : &nbsp;</label>*/}
             <select
-              className="form-select"
+              className="form-select input-lg"
               aria-label="Default select example"
               id="category"
               value={category}
@@ -123,9 +113,9 @@ export default function DetailsRecipeCard({ params }) {
               <option value="drink">boisson</option>
             </select>
           </div>
-          <div className="mb-2 col-md-9">
+          <div className="my-2 ">
             <textarea
-              className="form-control"
+              className="form-control input-lg"
               type="text"
               rows={3}
               value={ingredients}
@@ -134,9 +124,9 @@ export default function DetailsRecipeCard({ params }) {
               required
             />
           </div>
-          <div className="mb-2 col-md-9">
+          <div className="my-2 ">
             <textarea
-              className="form-control"
+              className="form-control input-lg"
               type="text"
               rows={3}
               value={instructions}
@@ -145,9 +135,9 @@ export default function DetailsRecipeCard({ params }) {
               required
             />
           </div>
-          <div className="mb-2 col-md-9">
+          <div className="my-2 ">
             <textarea
-              className="form-control"
+              className="form-control input-lg"
               type="text"
               rows={1}
               value={comments}
@@ -156,9 +146,9 @@ export default function DetailsRecipeCard({ params }) {
               required
             />
           </div>
-          <div className="mb-2 col-md-9">
+          <div className="my-2 ">
             <input
-              className="form-control"
+              className="form-control input-lg"
               type="text"
               rows={1}
               value={username}
@@ -168,12 +158,12 @@ export default function DetailsRecipeCard({ params }) {
             />
           </div>
 
-          <div className="mt-1  d-flex justify-content-center">
+          <div className="my-2  d-flex justify-content-center">
             <button
-              className="btn btn-outline-primary w-100"
+              className="btn btn-outline-success w-100"
               onClick={handleSubmit}
             >
-              Envoyer
+              Modifier
             </button>
           </div>
         </form>
@@ -183,11 +173,12 @@ export default function DetailsRecipeCard({ params }) {
     //l'utilisateur est déconnecté, afficher un message
     return (
 <div className="p-4  m-2 ">
-  <p className="my-5 p-5 d-flex justify-content-center text-white" style={linkStyle}>
+  <p className="my-5 p-5 d-flex justify-content-center text-success fs-5 rounded" 
+    style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace', backgroundColor: "#fafaf9",  opacity: 0.8}}
+  >
     Veuillez vous connecter pour voir les détails de la recette.
   </p>
 </div>
-
     );
   }
 }

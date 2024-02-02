@@ -11,12 +11,6 @@ export default function Header() {
   const auth = getAuth();
   const router = useRouter();
 
-  //style
-  const linkStyle = {
-    fontFamily: "Roboto",
-    fontSize: "2rem",
-  };
-
   // Fonction pour gérer la déconnexion
   const handleLogout = async (e) => {
     //prévenir le comportement par défaut du bouton
@@ -56,42 +50,28 @@ export default function Header() {
   //jsx
   return (
     <div className="container-flux ">
-      <nav
-        className="navbar  navbar-expand-sm bg-custom-color border-bottom border-body"
-        data-bs-theme="dark"
-      >
-        <div className="container">
-          <Link
-            href={"/"}
-            className="navbar-brand display-1 "
-            style={linkStyle}
-          >
-            Mon cahier de recettes
-          </Link>
-           {/* barre de recherche*/}
-          <div className="d-flex  align-items-center justify-content-center  mx-auto my-1">
-            <input
-              id="search-input"
-              className="form-control w-10vw bg-white text-black-placeholder text-black bg-gradient"
-              type="search"
-              placeholder="Rechercher un recette"
-              aria-label="Search"
-            />
-            <button
-              id="search-button"
-              className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-2 "
-              type="submit"
-            >
-              Rechercher
-            </button>
-          </div>
+      <nav className="navbar  navbar-light bg-light">
+        <div className="container  d-flex justify-content-around align-items-center">
+        <Link  
+            href={"/" }
+            className="navbar-brand fs-2 text-black"
+            style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
+            Mes recettes
+        </Link>
+
+        {/* barre de recherche*/}
+        <form className="d-flex my-1">
+          <input className="form-control me-2" type="search" placeholder="nom de la recette" />
+          <button className="btn btn-outline-success btn-sm px-2" type="submit">Rechercher</button>
+        </form>
+          
 
           {/* Affichez les liens de connexion ou de déconnexion en fonction de l'état */}
           <div>
             {isLoggedIn ? (
               <button
                 onClick={handleLogout}
-                className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-1 "
+                className="btn btn-outline-success  m-1 "
               >
                 Se déconnecter
               </button>
@@ -99,13 +79,13 @@ export default function Header() {
               <>
                 <Link
                   href={"/signup"}
-                  className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-1"
+                  className="btn btn-outline-success  m-1"
                 >
                   Créer un compte
                 </Link>
                 <Link
                   href={"/signin"}
-                  className="btn btn-outline-dark bg-white text-black bg-black-hover text-white-hover m-1"
+                  className="btn btn-outline-success  m-1"
                 >
                   Se connecter
                 </Link>

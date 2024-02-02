@@ -33,14 +33,13 @@ export default function SignUp() {
 
   return (
     <div
-      className="d-flex flex-column align-items-center justify-content-center"
-      
+      className="d-flex flex-column align-items-center justify-content-center m-auto"
     >
       <form
         onSubmit={handleSignIn}
-        className=" border border-black rounded py-2 px-5 form-shadow" style={{ "backgroundColor": "#ffffff" }}
+        className=" border border-success rounded py-2 px-5 shadow-lg form-shadow" style={{ "backgroundColor": "#fafaf9" }}
       >
-        <div className="fs-3 my-3 text-center mb-2 mt-1 fw-bold">
+        <div className="fs-3 my-3 text-center mb-2 mt-1" style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
           Se connecter
         </div>
 
@@ -82,13 +81,13 @@ export default function SignUp() {
         <button
           type="submit"
           
-          className="btn btn-primary mt-2  form-control"
+          className="btn btn-outline-success  form-control"
         >
           Se connecter
         </button>
         <p className="mt-2 form-text text-center">
           Nouvel utilisateur ? {""}
-          <Link href="/signup" className=" link-underline-light">
+          <Link href="/signup" className=" link-underline-light link-success link-offset-2 link-underline-opacity-100-hover">
             Enregistrez-vous.
           </Link>
         </p>

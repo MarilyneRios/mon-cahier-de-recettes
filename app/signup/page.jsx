@@ -35,9 +35,9 @@ export default function SignUp() {
     >
       <form
         onSubmit={handleSignUp}
-        className="max-width-sm max-height-sm border border-black rounded py-2 px-5  form-shadow" 
-        style={{ "backgroundColor": "#ffffff" }}>
-        <div className="fs-3  text-center my-2 fw-bold">
+        className="border border-success rounded py-2 px-5 shadow-lg form-shadow" 
+        style={{ "backgroundColor": "#fafaf9" }}>
+        <div className="fs-3 my-2 text-center  text-success" style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
           Créer un compte
         </div>
 
@@ -79,13 +79,13 @@ export default function SignUp() {
         <button
           type="submit"
           
-          className="btn btn-primary my-1 form-control"
+          className="btn btn-outline-success form-control"
         >
           Enregistrer
         </button>
         <p className="my-2 form-text text-center">
           Vous avez déjà un compte ? {""}
-          <Link href="/signin" className=" link-underline-light">
+          <Link href="/signin" className="  link-underline-light link-success link-offset-2 link-underline-opacity-100-hover">
             Connectez-vous.
           </Link>
         </p>

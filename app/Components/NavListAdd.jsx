@@ -3,17 +3,11 @@ import Link from "next/link";
 
 export default function NavListAdd() {
 
-    //style
-    const linkStyle = {
-      fontFamily: "Roboto",
-      fontSize: "1.8rem",
-    
-    };
-
+ 
   return (
     <div className="h-50%">
-      <div className="d-flex justify-content-between text-white mt-4 ">
-        <h4 style={linkStyle}>
+      <div className="d-flex justify-content-between  mt-3 ">
+        <h4 className="text-black fs-3">
           Liste de mes recettes favorites
         </h4>
         <div>

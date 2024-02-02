@@ -3,15 +3,10 @@ import React from "react";
 import Link from "next/link";
 
 export default function Footer() {
-  const linkStyle = {
-    fontFamily: "Roboto",
-    fontSize: "0.9rem",
-    
-  };
-
 
   return (
-    <div  className="container-fluid panel-footer p-3 text-center"  style={linkStyle}>
+    <div  className="container-fluid panel-footer p-3 text-center mt-auto fs-6"  
+    style={{  fontFamily: "Roboto",backgroundColor: '#fafaf9'}}>
    
       <div className='d-flex flex-column align-items-center justify-content-center '>
         
@@ -23,23 +18,23 @@ export default function Footer() {
         <div>
         <Link
           href="mailto:Roads<rios.marilyne@gmail.com"
-          className="btn btn-link link-underline-light contact-details"
+          className="link-underline-light link-success link-offset-2 link-underline-opacity-100-hover fs-5 me-2"
         >
           Contact
         </Link>
         <Link
           href="https://github.com/MarilyneRios"
           target="_blank"
-          className="btn btn-link link-underline-light contact-details"
+          className="link-underline-light link-success link-offset-2 link-underline-opacity-100-hover fs-5 me-2"
         >
          GitHub
         </Link>
         <Link
           href="https://www.linkedin.com/in/marilyne-rios-59a13015b"
           target="_blank"
-          className="btn btn-link link-underline-light contact-details"
+          className="link-underline-light link-success link-offset-2 link-underline-opacity-100-hover fs-5"
         >
-          linkedin
+          Linkedin
         </Link>
         </div>
 

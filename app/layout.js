@@ -16,43 +16,29 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
-      <body className="">
-        <div id="section_header" 
-        style={{
-        maxHeight: "5vh",
-        width: "100vw",
-        }}>
+      <body className="min-vh-100 d-flex flex-column">
+        <div id="section_header">       
           <Header />
         </div>
 
         <div
           id="section_main"
-          className="m-0 py-3 relative"
+          className="flex-grow-1  d-flex align-items-center justify-content-center"
           style={{
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            display: "flex",
-            flex: "wrap",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100vw",
-            minHeight: "80vh",
-            zIndex: "-1",
-            backgroundImage: "url('/bg.jpg')",
+            backgroundImage: "url('/table-bois.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            width: "100%",
+            height: "auto",
           }}
         >
           {children}
         </div>
 
-        <div id="section_footer" 
-        style={{ 
-        maxHeight: "3vh", 
-        margin:"auto",
-        paddingTop: "0.5rem"
-        }}>
-          <Footer />
+        <div id="section_footer" >
+          <Footer/>
         </div>
       </body>
     </html>

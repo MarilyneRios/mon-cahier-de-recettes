@@ -1,126 +1,113 @@
+// Importation des modules nécessaires
 "use client";
-//import { Form } from "react-bootstrap";
 import { useState } from "react";
 import { auth, storage, db } from "../../lib/firebase";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection, getDocs,getDoc, addDoc, setDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import ButtonBack from "@/app/Components/ButtonBack";
 
+// Définition du composant CreateRecipe
 export default function CreateRecipe() {
+  // Déclaration des états
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [comments, setComments] = useState("");
-  const [username, setUsername] = useState ("");
+  const [username, setUsername] = useState("");
   const [files, setFiles] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  // Initialisation du routeur Next.js
   const router = useRouter();
 
+  // Fonction pour gérer le téléchargement de l'image
   const handleImageUpload = (e) => {
     setFiles(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
-    //évite le rechargement de la page dans le cas d'un formulaire
+  // Fonction pour gérer la soumission du formulaire
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const storage = getStorage();
+    // Désactiver le bouton dès le début du traitement
+    setIsButtonDisabled(true);
 
-// Create the file metadata
-/** @type {any} */
-const metadata = {
-  contentType: 'image/jpeg'
-};
+    try {
+      const storageRef = ref(storage, files.name);
+      const metadata = {
+        contentType: 'image/jpeg'
+      };
 
-    // **exemple complet de téléchargement de firebase**
-    const storageRef = ref(storage, files.name ); 
-    const uploadTask = uploadBytesResumable(storageRef, files, metadata);
-    
-    // Listen for state changes, errors, and completion of the upload.
-        uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-        }
-      },
-      (error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-          case "storage/unauthorized":
-            // User doesn't have permission to access the object
-            break;
-          case "storage/canceled":
-            // User canceled the upload
-            break;
+      // Créer une tâche de téléchargement
+      const uploadTask = uploadBytesResumable(storageRef, files, metadata);
 
-          case "storage/unknown":
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-        }
-      },
-      () => {
-        // Upload completed successfully, now we can get the download URL
-        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-          console.log("File available at", downloadURL);
-          //télécharger les datas des inputs
+      // Écouter les changements d'état, les erreurs et la fin du téléchargement.
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Suivi de la progression de l'upload...
+        },
+        (error) => {
+          // Gestion des erreurs pendant l'upload...
+          console.error("Error during upload:", error);
+          setIsButtonDisabled(false); // Réactiver le bouton en cas d'erreur
+        },
+        async () => {
+          // Upload réussi, obtenir l'URL de téléchargement
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
+          // Enregistrement des données dans la base de données
           const recipesCollection = collection(db, "recipes");
-          const recipesSnapshot = await getDocs(recipesCollection); //getDoc
-          try{
-            await addDoc(recipesCollection,{
-              title: title,
-              category: category,
-              ingredients: ingredients,
-              instructions:instructions,
-              comments: comments,
-              imageUrl: downloadURL,
-              username: username,
-              userId: auth.currentUser.uid,
-            })
-          }
-          catch (error){
-            alert("Something went wrong", error)
-          }
+          await addDoc(recipesCollection, {
+            title: title,
+            category: category,
+            ingredients: ingredients,
+            instructions: instructions,
+            comments: comments,
+            imageUrl: downloadURL,
+            username: username,
+            userId: auth.currentUser.uid,
+          });
+
+          // Réinitialisation des champs et redirection
           setTitle("");
           setIngredients("");
           setInstructions("");
           setComments("");
-          setUsername ("");
-          setFiles(""); 
-          
-          router.push("/")
-        });
-      }
-    );
+          setUsername("");
+          setFiles("");
+          router.push("/");
+          setIsButtonDisabled(false); // Réactiver le bouton après le traitement
+        }
+      );
+    } catch (error) {
+      // Gestion des erreurs générales
+      console.error("General error:", error);
+      setIsButtonDisabled(false); // Réactiver le bouton en cas d'erreur
+    }
   };
+
 
   return (
     <div
-      className="d-flex align-items-center justify-content-center mb-2 w-75 "
+      className="container d-flex flex-column align-items-center justify-content-center"
     >
       <form
-        className="d-flex  flex-column  align-items-center justify-content-center mt-2 custom-width  border border-black rounded p-1 form-shadow"
-        style={{ backgroundColor: "#ffffff" }}
+        className="border border-success rounded py-2 px-5 shadow-lg form-shadow w-75 my-3"
+        style={{ backgroundColor: "#fafaf9"}}
         onSubmit={handleSubmit}
       >
-        <h1 className="mb-1 text-center " style={{ color: "#007bff" }}>
+        <ButtonBack/>
+        <h1 className="fs-1 my-2 text-center text-success" 
+          style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
           {" "}
           Créer une recette
         </h1>
-        <div className="mb-2 col-md-9">
+        <div className="mb-2">
           <input
-            className="form-control"
+            className="form-control input-lg"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -128,10 +115,10 @@ const metadata = {
             required
           />
         </div>
-        <div className="mb-2 col-md-9">
+        <div className="mb-2 ">
           {/* <label htmlFor="category">Catégorie : &nbsp;</label>*/}
           <select
-            className="form-select"
+            className="form-control input-lg"
             aria-label="Default select example"
             id="category"
             value={category}
@@ -145,42 +132,45 @@ const metadata = {
             <option value="drink">boisson</option>
           </select>
         </div>
-        <div className="mb-2 col-md-9">
+        <div className="mb-2">
           <textarea
-            className="form-control"
+            className="form-control input-lg"
             type="text"
             rows={3}
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             placeholder="Les ingrédients"
+            style={{ height: "auto", resize: "none" }}
             required
           />
         </div>
-        <div className="mb-2 col-md-9">
+        <div className="mb-2">
           <textarea
-            className="form-control"
+            className="form-control  input-lg"
             type="text"
             rows={3}
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
             placeholder="Les instructions"
+            style={{ height: "auto", resize: "none" }}
             required
           />
         </div>
-        <div className="mb-2 col-md-9">
+        <div className="mb-2">
           <textarea
-            className="form-control"
+            className="form-control input-lg"
             type="text"
             rows={1}
             value={comments}
             onChange={(e) => setComments(e.target.value)}
             placeholder="Ajouter un commentaire"
+            style={{ height: "auto", resize: "none" }}
             required
           />
         </div>
-        <div className="mb-2 col-md-9">
+        <div className="mb-2">
           <input
-            className="form-control"
+            className="form-control input-lg"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -188,17 +178,18 @@ const metadata = {
             required
           />
         </div>
-        <div className="mb-2 col-md-9">
+        <div className="mb-2">
           <input
             type="file"
-            class="form-control"
+            class="form-control input-lg"
             onChange={handleImageUpload}
             required
           />
-           
         </div>
         <div className="mb-1  d-flex justify-content-center">
-          <button className="btn btn-outline-primary w-100">Envoyer</button>
+          <button className="btn btn-outline-success w-100"
+          disabled={isButtonDisabled} 
+          >Envoyer</button>
         </div>
       </form>
     </div>
