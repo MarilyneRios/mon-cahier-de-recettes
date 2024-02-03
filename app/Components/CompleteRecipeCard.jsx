@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ButtonRead from "./ButtonRead";
+import ButtonChange from "./ButtonChange";
 
 export default function CompleteRecipeCard({ recipeProps }) {
   const [user, setUser] = useState(null);
   const auth = getAuth();
+  const { id } = recipeProps; 
+
 
   //Ecouter les changements d'état d'authentification
   useEffect(() => {
@@ -34,8 +37,9 @@ export default function CompleteRecipeCard({ recipeProps }) {
             className="card"
             style={{ width: "20rem", position: "relative" }}
           >
-            <div>
-              <ButtonRead />
+            <div  className="d-flex align-items-center justify-content-between">
+              <ButtonRead id={id} />{/* Passer l'id comme prop */}
+              <ButtonChange id={id} />
             </div>
             <Image
               className="card-img-top rounded d-flex align-items-center justify-content"

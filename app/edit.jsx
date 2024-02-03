@@ -1,15 +1,15 @@
 "use client";
 //import { Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { db } from "../../../lib/firebase";
+import { db } from "../../lib/firebase";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 //importer le composant auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ButtonBack from "@/app/Components/ButtonBack";
-import CompleteRecipeCard from "../../../Components/CompleteRecipeCard"
 
-export default function DetailsRecipeCard({ params,  recipeProps }) {
+
+export default function DetailsRecipeCard({ params }) {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -40,7 +40,6 @@ export default function DetailsRecipeCard({ params,  recipeProps }) {
         if (recipeDoc.exists()) {
           const data = recipeDoc.data();
           setTitle(data.title);
-          setFiles(data.files)
           setCategory(data.category);
           setIngredients(data.ingredients);
           setInstructions(data.instructions);
@@ -56,43 +55,54 @@ export default function DetailsRecipeCard({ params,  recipeProps }) {
     getDetailsRecipeCard();
   }, [params.id]);
 
+  const handleSubmit = async (e) => {
+    //évite le rechargement de la page dans le cas d'un formulaire
+    e.preventDefault();
+    const recipeDoc = doc(db, "recipes", params.id);
+    await updateDoc(recipeDoc, {
+      title: title,
+      category: category,
+      ingredients: ingredients,
+      instructions: instructions,
+      comments: comments,
+      username: username,
+    });
+    router.push("/");
+  };
 
   //si l'utilisateur est connecté, afficher le composant
-  //if (user) {
+  if (user) {
     return (
       <div
-        className="container d-flex flex-column align-items-center justify-content-center"
+        className="container  d-flex flex-column align-items-center justify-content-center"
       >
         <form
           className="border border-success rounded py-2 px-5 shadow-lg form-shadow w-75 my-3"
           style={{ backgroundColor: "#fafaf9"}}
+          onSubmit={handleSubmit}
         >
-        <ButtonBack/>
-
-        <CompleteRecipeCard params={files} recipeProps={recipeProps} />
-
-        <h1 className="fs-2 my-2 text-center text-success" style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
-            Lire la recette
+            <ButtonBack/>
+          <h1 className="fs-3 my-2 text-center  text-success" style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
+            Modifier la recette
           </h1>
-          <div className="my-2">
+          <div className="my-2 ">
             <input
               className="form-control input-lg"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="titre"
-              style={{ height: "auto", resize: "none" }}
-              readOnly
+              required
             />
           </div>
-          <div className="my-2">
+          <div className="my-2 ">
+            {/* <label htmlFor="category">Catégorie : &nbsp;</label>*/}
             <select
               className="form-select input-lg"
               aria-label="Default select example"
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              disabled //  lecture seulement
             >
               <option value="">Selectionner une Categorie</option>
               <option value="aperitif">Apéro</option>
@@ -110,8 +120,7 @@ export default function DetailsRecipeCard({ params,  recipeProps }) {
               value={ingredients}
               onChange={(e) => setIngredients(e.target.value)}
               placeholder="Les ingrédients"
-              style={{ height: "auto", resize: "none" }}
-              readOnly
+              required
             />
           </div>
           <div className="my-2 ">
@@ -122,8 +131,7 @@ export default function DetailsRecipeCard({ params,  recipeProps }) {
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
               placeholder="Les instructions"
-              style={{ height: "auto", resize: "none" }}
-              readOnly
+              required
             />
           </div>
           <div className="my-2 ">
@@ -134,8 +142,7 @@ export default function DetailsRecipeCard({ params,  recipeProps }) {
               value={comments}
               onChange={(e) => setComments(e.target.value)}
               placeholder="Ajouter un commentaire"
-              style={{ height: "auto", resize: "none" }}
-              readOnly
+              required
             />
           </div>
           <div className="my-2 ">
@@ -146,14 +153,22 @@ export default function DetailsRecipeCard({ params,  recipeProps }) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Ajouter un pseudo"
-              style={{ height: "auto", resize: "none" }}
-              readOnly
+              required
             />
+          </div>
+
+          <div className="my-2  d-flex justify-content-center">
+            <button
+              className="btn btn-outline-success w-100"
+              onClick={handleSubmit}
+            >
+              Modifier
+            </button>
           </div>
         </form>
       </div>
     );
- /* } else {
+  } else {
     //l'utilisateur est déconnecté, afficher un message
     return (
 <div className="p-4  m-2 ">
@@ -164,5 +179,5 @@ export default function DetailsRecipeCard({ params,  recipeProps }) {
   </p>
 </div>
     );
-  }*/
+  }
 }
