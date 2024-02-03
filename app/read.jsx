@@ -1,30 +1,27 @@
 "use client";
 //import { Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { db } from "../../lib/firebase";
+import { db } from "./lib/firebase";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 //importer le composant auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ButtonBack from "@/app/Components/ButtonBack";
-import CompleteRecipeCard from "../../Components/CompleteRecipeCard"
+import CompleteRecipeCard from "./Components/CompleteRecipeCard"
 
 export default function DetailsRecipeCard({ params }) {
   const router = useRouter();
-  const { id } = router.query;
- 
+  //const { id } = router.query; //pour obtenir les paramètres de l'URL
+  const auth = getAuth();
+  //
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [instructions, setInstructions] = useState("");
   const [comments, setComments] = useState("");
-  const [username, setUsername] = useState ("");
-  const [files, setFiles] = useState("");
+  const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
-  const auth = getAuth();
   
-
-    //Ecouter les changements d'état d'authentification
     useEffect(() => {
       return onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -35,29 +32,27 @@ export default function DetailsRecipeCard({ params }) {
       });
     }, []);
 
-  useEffect(() => {
-    const getDetailsRecipeCard = async () => {
-      try {
-        const recipeDoc = await getDoc(doc(db, "recipes", params.id));
 
+    useEffect(() => {
+      const getDetailsRecipeCard = async () => {
+        const recipeDoc = await getDoc(doc(db, "recipes", params.id));
+    
         if (recipeDoc.exists()) {
           const data = recipeDoc.data();
           setTitle(data.title);
-          setFiles(data.files)
           setCategory(data.category);
           setIngredients(data.ingredients);
           setInstructions(data.instructions);
           setComments(data.comments);
+          setUsername(data.username);
         } else {
           console.log("No such document!");
+        
         }
-      } catch (error) {
-        console.error("Error getting document:", error);
-      }
-    };
-
-    getDetailsRecipeCard();
-  }, [params.id]);
+      };
+    
+      getDetailsRecipeCard();
+    }, [params.id]);
 
 
   //si l'utilisateur est connecté, afficher le composant

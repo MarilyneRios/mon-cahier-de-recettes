@@ -59,8 +59,17 @@ export default function DetailsRecipeCard({ params }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
+    const recipeDoc = doc(db, "recipes", params.id);
+    await updateDoc (recipeDoc, {
+      title: title,
+      category: category,
+      ingredients: ingredients,
+      instructions: instructions,
+      comments: comments,
+      username: username,
+      userId: auth.currentUser.uid,
+    })
+    router.push("/");
   };
 
   if (user) {

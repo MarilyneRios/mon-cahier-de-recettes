@@ -52,7 +52,7 @@ export default function Home() {
         <div key={recipe.id} className="col-md-4 mb-4">
           {recipe.imageUrl ? (
             user ? (
-              <CompleteRecipeCard recipeProps={recipe} />
+              <CompleteRecipeCard   recipeProps={recipe} />
             ) : (
               <RecipeCard recipeProps={recipe} />
             )
