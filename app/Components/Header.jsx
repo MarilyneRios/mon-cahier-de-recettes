@@ -61,7 +61,7 @@ export default function Header() {
 
         {/* barre de recherche*/}
         <form className="d-flex my-1">
-          <input className="form-control me-2" type="search" placeholder="nom de la recette" />
+          <input className="form-control me-2" type="search" placeholder="nom ou catégorie de la recette" />
           <button className="btn btn-outline-success btn-sm px-2" type="submit">Rechercher</button>
         </form>
           
