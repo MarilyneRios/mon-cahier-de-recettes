@@ -1,19 +1,12 @@
 "use client";
-//import { Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { db } from "./lib/firebase";
-import { getDoc, doc, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
-//importer le composant auth
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { db } from "../../lib/firebase";
+import { getDoc, doc } from "firebase/firestore";
+import { onAuthStateChanged ,getAuth} from "firebase/auth";
 import ButtonBack from "@/app/Components/ButtonBack";
-import CompleteRecipeCard from "./Components/CompleteRecipeCard"
+import { useRouter } from "next/navigation";
 
-export default function DetailsRecipeCard({ params }) {
-  const router = useRouter();
-  //const { id } = router.query; //pour obtenir les paramètres de l'URL
-  const auth = getAuth();
-  //
+export default function ReadRecipeCard() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [ingredients, setIngredients] = useState("");
@@ -21,53 +14,61 @@ export default function DetailsRecipeCard({ params }) {
   const [comments, setComments] = useState("");
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
+
+  const router = useRouter();  
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+
+  useEffect(() => {
+    const { id } = router.query;
   
-    useEffect(() => {
-      return onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setUser(user);
-        } else {
-          setUser(null);
-        }
-      });
-    }, []);
-
-
-    useEffect(() => {
-      const getDetailsRecipeCard = async () => {
-        const recipeDoc = await getDoc(doc(db, "recipes", params.id));
-    
-        if (recipeDoc.exists()) {
-          const data = recipeDoc.data();
-          setTitle(data.title);
-          setCategory(data.category);
-          setIngredients(data.ingredients);
-          setInstructions(data.instructions);
-          setComments(data.comments);
-          setUsername(data.username);
-        } else {
-          console.log("No such document!");
-        
+    // Check if router.query and router.query.id are defined
+    if (id) {
+      const getReadRecipeCard = async () => {
+        try {
+          const recipeDoc = await getDoc(doc(db, "recipes", id));
+  
+          if (recipeDoc.exists()) {
+            const data = recipeDoc.data();
+            setTitle(data.title);
+            setCategory(data.category);
+            setIngredients(data.ingredients);
+            setInstructions(data.instructions);
+            setComments(data.comments);
+            setUsername(data.username);
+          } else {
+            console.log("Recipe not found!");
+          }
+        } catch (error) {
+          console.error("Error fetching recipe:", error);
         }
       };
-    
-      getDetailsRecipeCard();
-    }, [params.id]);
-
+  
+      getReadRecipeCard();
+    }
+  }, [router.query]);
+  
 
   //si l'utilisateur est connecté, afficher le composant
-  //if (user) {
+  if (user) {
     return (
+
       <div
         className="container d-flex flex-column align-items-center justify-content-center"
       >
+      
         <form
           className="border border-success rounded py-2 px-5 shadow-lg form-shadow w-75 my-3"
           style={{ backgroundColor: "#fafaf9"}}
         >
         <ButtonBack/>
-
-        <CompleteRecipeCard params={files} recipeProps={recipeProps} />
 
         <h1 className="fs-2 my-2 text-center text-success" style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
             Lire la recette
@@ -80,7 +81,7 @@ export default function DetailsRecipeCard({ params }) {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="titre"
               style={{ height: "auto", resize: "none" }}
-              readOnly
+              disabled
             />
           </div>
           <div className="my-2">
@@ -109,7 +110,7 @@ export default function DetailsRecipeCard({ params }) {
               onChange={(e) => setIngredients(e.target.value)}
               placeholder="Les ingrédients"
               style={{ height: "auto", resize: "none" }}
-              readOnly
+              disabled
             />
           </div>
           <div className="my-2 ">
@@ -121,7 +122,7 @@ export default function DetailsRecipeCard({ params }) {
               onChange={(e) => setInstructions(e.target.value)}
               placeholder="Les instructions"
               style={{ height: "auto", resize: "none" }}
-              readOnly
+              disabled
             />
           </div>
           <div className="my-2 ">
@@ -133,7 +134,7 @@ export default function DetailsRecipeCard({ params }) {
               onChange={(e) => setComments(e.target.value)}
               placeholder="Ajouter un commentaire"
               style={{ height: "auto", resize: "none" }}
-              readOnly
+              disabled
             />
           </div>
           <div className="my-2 ">
@@ -145,22 +146,26 @@ export default function DetailsRecipeCard({ params }) {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Ajouter un pseudo"
               style={{ height: "auto", resize: "none" }}
-              readOnly
+              disabled
             />
           </div>
         </form>
       </div>
     );
- /* } else {
-    //l'utilisateur est déconnecté, afficher un message
-    return (
-<div className="p-4  m-2 ">
-  <p className="my-5 p-5 d-flex justify-content-center text-success fs-5 rounded" 
-    style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace', backgroundColor: "#fafaf9",  opacity: 0.8}}
-  >
-    Veuillez vous connecter pour voir les détails de la recette.
-  </p>
-</div>
+  }  return (
+    <div className="p-4 m-2">
+      <p
+        className="my-5 p-5 d-flex justify-content-center text-success fs-5 rounded"
+        style={{
+          fontFamily:
+            'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace',
+          backgroundColor: "#fafaf9",
+          opacity: 0.8,
+        }}
+      >
+        Veuillez vous connecter pour voir les détails de la recette.
+      </p>
+    </div>
     );
-  }*/
+  
 }

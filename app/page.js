@@ -67,7 +67,7 @@ export default function Home() {
     return (
       <main className="my-2 container" >
         {/* nav bis */}
-        <div className=" d-flex justify-content-between align-items-center mt-2 text-black border-success rounded py-2 px-3" 
+        <div className=" d-flex justify-content-between align-items-center mt-3 text-black border-success rounded py-2 px-3" 
           style={{backgroundColor: '#fafaf9'}} >
           <h3 className="fs-3" 
             style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
         {/* liste des recettes */}
         <div class="container">
-          <div className="row align-items-center mt-4">
+          <div className="row align-items-center mt-3">
           {renderRecipeCards(recipesList)}
           </div>
         </div>      

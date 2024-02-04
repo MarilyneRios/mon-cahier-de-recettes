@@ -136,7 +136,7 @@ export default function CreateRecipe() {
           <textarea
             className="form-control input-lg"
             type="text"
-            rows={3}
+            rows={5}
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             placeholder="Les ingrédients"
@@ -148,7 +148,7 @@ export default function CreateRecipe() {
           <textarea
             className="form-control  input-lg"
             type="text"
-            rows={3}
+            rows={5}
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
             placeholder="Les instructions"

@@ -2,19 +2,13 @@
 import { useEffect, useState } from "react";
 import { db } from "../../lib/firebase";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
 import { useRouter } from "next/navigation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ButtonBack from "@/app/Components/ButtonBack";
 
 export default function DetailsRecipeCard({ params }) {
   const router = useRouter();
-  //const { id } = router.query; //pour obtenir les paramètres de l'URL
+  
   const auth = getAuth();
   //
   const [title, setTitle] = useState("");
@@ -101,7 +95,6 @@ export default function DetailsRecipeCard({ params }) {
             />
           </div>
           <div className="my-2 ">
-            {/* <label htmlFor="category">Catégorie : &nbsp;</label>*/}
             <select
               className="form-select input-lg"
               aria-label="Default select example"

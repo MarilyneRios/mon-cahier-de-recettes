@@ -22,7 +22,7 @@ export default function Header() {
         const user = userCredential.user;
         console.log(user);
         window.alert("Sign-out successful user");
-        router.push("/recipes/lire");
+        router.push("/recipes/");
       })
       .catch((error) => {
         const errorCode = error.code;
