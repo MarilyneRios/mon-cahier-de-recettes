@@ -1,14 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { db } from "../../lib/firebase";
-import { getDoc, doc, updateDoc } from "firebase/firestore";
+import { getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { getStorage, ref, deleteObject} from "firebase/storage";
 import { useRouter } from "next/navigation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ButtonBack from "@/app/Components/ButtonBack";
 
 export default function DetailsRecipeCard({ params }) {
   const router = useRouter();
-  
+  const storage = getStorage();
   const auth = getAuth();
   //
   const [title, setTitle] = useState("");
@@ -65,6 +66,18 @@ export default function DetailsRecipeCard({ params }) {
     })
     router.push("/");
   };
+    // Fonction pour supprimer une recette
+    const handleDeleteRecipe = async (e) => {
+      e.preventDefault();
+      const recipeDoc = doc(db, "recipes", params.id);
+      await deleteDoc(recipeDoc).then(() => {
+        console.log("Recette supprimée avec succès!");
+      }).catch((error) => {
+        console.error("Erreur lors de la suppression de la recette: ", error);
+      });
+      router.push("/");
+    };
+    
 
   if (user) {
     return (
@@ -157,10 +170,13 @@ export default function DetailsRecipeCard({ params }) {
 
           <div className="my-2  d-flex justify-content-center">
             <button
-              className="btn btn-outline-success w-100"
+              className="btn btn-outline-success w-25 m-1"
               onClick={handleSubmit}
             >
               Modifier
+            </button>
+            <button type="button" onClick={handleDeleteRecipe} className="btn btn-outline-danger m-1 w-25 py-2">
+                  Supprimer
             </button>
           </div>
         </form>

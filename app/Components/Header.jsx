@@ -55,7 +55,7 @@ export default function Header() {
             href={"/" }
             className="navbar-brand fs-2 text-black link-success"
             style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
-            Mes recettes
+            Mon cahier de recettes
         </Link>
          
           {/* Affichez les liens de connexion ou de déconnexion en fonction de l'état */}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ButtonChange from "./ButtonChange";
 
+
 export default function CompleteRecipeCard({ recipeProps }) {
   const [user, setUser] = useState(null);
   const auth = getAuth();
@@ -20,6 +21,8 @@ export default function CompleteRecipeCard({ recipeProps }) {
     });
     return () => unsubscribe();
   }, [auth]);
+
+
 
   const handleBigCardClick = () => {
     setIsBigCard(!isBigCard);
@@ -49,6 +52,7 @@ export default function CompleteRecipeCard({ recipeProps }) {
                 Lire
               </button>
               <ButtonChange id={id} />
+      
             </div>
             <Image
               className="card-img-top rounded d-flex align-items-center justify-content"
