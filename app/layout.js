@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./Components/header";
+import Header from "./Components/Header";
 //import HeaderConnect from "./Components/headerConnect";
 import Footer from "./Components/Footer";
 
