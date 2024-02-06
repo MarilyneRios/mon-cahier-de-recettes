@@ -5,17 +5,18 @@ import CompleteRecipeCard from "./Components/CompleteRecipeCard";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./lib/firebase";
+
+
 //importer le composant auth
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 export default function Home() {
-
   const [user, setUser] = useState(null);
   const auth = getAuth();
   const [recipesList, setRecipesList] = useState([]);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
  
-  //Ecouter les changements d'état d'authentification
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -35,8 +36,9 @@ export default function Home() {
         ...doc.data(),
         id: doc.id,
       }));
-      setRecipesList(recipesData);
+     // setRecipesList(recipesData);
       console.log(recipesList);
+      setFilteredRecipes(recipesData)
     };
 
     getRecipesList();
@@ -46,7 +48,7 @@ export default function Home() {
     console.log(recipesList);
   }, [recipesList]);
 
-    //Afficher 3 RecipeCard par ligne
+  //Afficher 3 RecipeCard par ligne
     const renderRecipeCards = (recipes) => {
       return recipes.map((recipe) => (
         <div key={recipe.id} className="col-md-4 mb-4">
@@ -60,8 +62,7 @@ export default function Home() {
         </div>
       ));
     };
-
-
+ 
   //si l'utilisateur est connecté, afficher le composant
   if (user) {
     return (
@@ -69,23 +70,24 @@ export default function Home() {
         {/* nav bis */}
         <div className=" d-flex justify-content-between align-items-center mt-3 text-black border-success rounded py-2 px-3" 
           style={{backgroundColor: '#fafaf9'}} >
-          <h3 className="fs-3" 
-            style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
-            Liste des recettes
-          </h3>
-          <div >
+           <Link href={"/"} className="text-black  text-decoration-none cursor-pointer link-success" >
+            <h3 className="fs-3" 
+              style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
+              Liste des recettes
+            </h3> 
+           </Link>
+
+          <div className="d-flex  justify-content-between align-items-center mx-4">
+           
             <Link href={"/recipes/create"} className="btn btn-outline-success m-2" >
               Ajouter une nouvelle recette
-            </Link>
-            <Link href={"/"} className="btn btn-outline-success  m-2" >
-              Liste des recettes
             </Link>
           </div>
         </div>
         {/* liste des recettes */}
         <div class="container">
           <div className="row align-items-center mt-3">
-          {renderRecipeCards(recipesList)}
+          {renderRecipeCards(filteredRecipes)}
           </div>
         </div>      
       </main>
@@ -95,7 +97,7 @@ export default function Home() {
     return (
       <main className="container">
         <div className="row align-items-center">
-          {renderRecipeCards(recipesList)}
+        {renderRecipeCards(recipesList)}
         </div>
       </main>
     );

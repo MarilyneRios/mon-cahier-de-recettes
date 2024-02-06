@@ -2,12 +2,11 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import { useRouter } from "next/navigation"; //attention PAS "next/router";
+import { useRouter } from "next/navigation"; 
 
 export default function Header() {
   //gérer l'état de connexion
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  //définir la variable auth
   const auth = getAuth();
   const router = useRouter();
 
@@ -47,25 +46,18 @@ export default function Header() {
     return () => unsubscribe();
   }, []);
 
-  //jsx
+
   return (
     <div className="container-flux ">
       <nav className="navbar  navbar-light bg-light">
         <div className="container  d-flex justify-content-around align-items-center">
         <Link  
             href={"/" }
-            className="navbar-brand fs-2 text-black"
+            className="navbar-brand fs-2 text-black link-success"
             style={{ fontFamily: 'ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace' }}>
             Mes recettes
         </Link>
-
-        {/* barre de recherche*/}
-        <form className="d-flex my-1">
-          <input className="form-control me-2" type="search" placeholder="nom ou catégorie de la recette" />
-          <button className="btn btn-outline-success btn-sm px-2" type="submit">Rechercher</button>
-        </form>
-          
-
+         
           {/* Affichez les liens de connexion ou de déconnexion en fonction de l'état */}
           <div>
             {isLoggedIn ? (

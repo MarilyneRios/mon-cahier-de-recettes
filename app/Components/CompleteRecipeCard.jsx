@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import ButtonRead from "./ButtonRead";
 import ButtonChange from "./ButtonChange";
-
 
 export default function CompleteRecipeCard({ recipeProps }) {
   const [user, setUser] = useState(null);
@@ -20,13 +18,11 @@ export default function CompleteRecipeCard({ recipeProps }) {
         setUser(null);
       }
     });
-
-    // Fonction de nettoyage
     return () => unsubscribe();
   }, [auth]);
 
   const handleBigCardClick = () => {
-        setIsBigCard(!isBigCard);
+    setIsBigCard(!isBigCard);
   };
 
   return (
@@ -36,14 +32,12 @@ export default function CompleteRecipeCard({ recipeProps }) {
         className="d-flex align-items-center justify-content-center"
         style={{ position: isBigCard ? "relative" : "static", zIndex: isBigCard ? 1 : 0, marginTop: isBigCard ? "15rem": "1rem" }}
       >
-        <div
-          className={`me-4 mt-4 d-flex align-items-center justify-content-center form-shadow rounded`}
-        >
-          <div
-              className={`card ${isBigCard ? "big-card" : ""}`}
+        <div className={`me-4 mt-4 d-flex align-items-center justify-content-center form-shadow rounded`}>
+          <div className={`card ${isBigCard ? "big-card" : ""}`}
               style={{ width: isBigCard ? "30rem" : "20rem", 
-              height: isBigCard ? "50rem" : "35rem", 
-              position: isBigCard ?  "absolute" :"relative",  
+              height: isBigCard ? "55rem" : "35rem", 
+              position: isBigCard ?  "absolute" :"relative", 
+              marginLeft: isBigCard ? "1.5rem" : "auto", 
               }}
           >
             <div  className="d-flex align-items-center justify-content-between">
@@ -86,7 +80,7 @@ export default function CompleteRecipeCard({ recipeProps }) {
               <p
                 className="card-text"
                 style={{
-                   height: isBigCard ? "10rem" : "3rem",
+                   height: isBigCard ? "15rem" : "3rem",
                     overflowY: "auto",
                     backgroundColor: '#fafaf9',
                     paddingLeft:"1rem",

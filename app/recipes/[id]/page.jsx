@@ -13,7 +13,7 @@ export default function DetailsRecipeCard({ params }) {
   //
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [ingredients, setIngredients] = useState("");
+  const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
   const [comments, setComments] = useState("");
   const [username, setUsername] = useState("");

@@ -12,7 +12,7 @@ export default function CreateRecipe() {
   // Déclaration des états
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [ingredients, setIngredients] = useState("");
+  const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
   const [comments, setComments] = useState("");
   const [username, setUsername] = useState("");
@@ -125,11 +125,11 @@ export default function CreateRecipe() {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Selectionner une Categorie</option>
-            <option value="aperitif">Apéro</option>
-            <option value="starter">Entrée</option>
-            <option value="mainCourse">Plat</option>
-            <option value="dessert">Dessert</option>
-            <option value="drink">boisson</option>
+            <option value="Apéritif">Apéritif</option>
+            <option value="Entrée">Entrée</option>
+            <option value="Plat">Plat</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Boisson">Boisson</option>
           </select>
         </div>
         <div className="mb-2">

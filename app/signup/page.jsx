@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation"; //attention PAS "next/router";
 
 
-export default function SignUp() {
+export default function SignIn() {
   
   const router = useRouter();
  // const auth = getAuth();//
