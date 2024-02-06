@@ -87,7 +87,17 @@ export default function DetailsRecipeCard({ params }) {
           style={{ backgroundColor: "#fafaf9" }}
           onSubmit={handleSubmit}
         >
-          <ButtonBack />
+          <div className="my-2  d-flex justify-content-between">
+            <ButtonBack />
+            <button
+              type="button"
+              onClick={handleDeleteRecipe}
+              className="btn btn-outline-danger m-1 "
+            >
+             X
+            </button>
+          </div>
+
           <h1
             className="fs-3 my-2 text-center  text-success"
             style={{
@@ -170,13 +180,10 @@ export default function DetailsRecipeCard({ params }) {
 
           <div className="my-2  d-flex justify-content-center">
             <button
-              className="btn btn-outline-success w-25 m-1"
+              className="btn btn-outline-success w-100 m-1"
               onClick={handleSubmit}
             >
               Modifier
-            </button>
-            <button type="button" onClick={handleDeleteRecipe} className="btn btn-outline-danger m-1 w-25 py-2">
-                  Supprimer
             </button>
           </div>
         </form>

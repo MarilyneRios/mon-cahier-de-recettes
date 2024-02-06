@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import ButtonChange from "./ButtonChange";
-
+import { useRouter } from "next/navigation";
 
 export default function CompleteRecipeCard({ recipeProps }) {
   const [user, setUser] = useState(null);
   const auth = getAuth();
   const { id } = recipeProps; 
   const [isBigCard, setIsBigCard] = useState(false);
+  const router = useRouter();
+
 
   //Ecouter les changements d'état d'authentification
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function CompleteRecipeCard({ recipeProps }) {
     return () => unsubscribe();
   }, [auth]);
 
-
+ 
 
   const handleBigCardClick = () => {
     setIsBigCard(!isBigCard);
@@ -52,6 +54,7 @@ export default function CompleteRecipeCard({ recipeProps }) {
                 Lire
               </button>
               <ButtonChange id={id} />
+   
       
             </div>
             <Image
