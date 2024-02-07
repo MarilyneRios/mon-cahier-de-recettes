@@ -1,14 +1,9 @@
-/** @type {import('next').NextConfig} */
-/*const nextConfig = {
-    images:{
-        domains:["firebasestorage.googleapis.com"]
-    } 
-};
+///** @type {import('next').NextConfig} */
 
-export default nextConfig;*/
-// next.config.js
-
-
+/*
+export default (phase, { defaultConfig }) => {
+  
+   @type {import('next').NextConfig}
 const nextConfig = {
     images: {
       remotePatterns: [
@@ -19,15 +14,26 @@ const nextConfig = {
         },
       ],
     },
+
   };
-  export default nextConfig;
-  module.exports = {
-    async rewrites() {
-      return [
+  return nextConfig
+}*/
+
+// next.config.mjs
+export default (phase, { defaultConfig }) => {
+  /**
+   * @type {import('next').NextConfig}
+   */
+  const nextConfig = {
+    images: {
+      remotePatterns: [
         {
-          source: '/page',
-          destination: '/',
+          protocol: 'https',
+          hostname: 'firebasestorage.googleapis.com',
+          pathname: '**',
         },
-      ]
+      ],
     },
+  }
+    return nextConfig
   }
